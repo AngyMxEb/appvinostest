@@ -110,6 +110,23 @@
         transform: scale(1.05);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
     }
+    .review-questions{
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+        width: 90%;
+        position: relative;
+        overflow: hidden;
+    }
+    .review-questions:hover {
+        background: rgba(255, 255, 255, 0.2); 
+        transform: scale(1.05) rotate(1deg); 
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+	}
     </style>
 </head>
 <body>
@@ -123,7 +140,7 @@
 	  <!-- Opciones de ver las preguntas -->
     <div id="quiz-completion" style="display: none;">
         <h2>Revisar respuestas:</h2>
-        <div id="review-questions"><br></div>
+        <div class="review-questions"></div>
 		<div class="divVolver">
             <a href="quiz.html"><button class="volver">Empezar otra vez</button></a>
         </div>
