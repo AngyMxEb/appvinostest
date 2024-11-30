@@ -220,27 +220,28 @@
             }
         }
 
-		 function showCompletion() {
+	function showCompletion() {
             const quizContainer = document.querySelector('.quiz-container');
             quizContainer.style.display = 'none';
             const completionSection = document.getElementById('quiz-completion');
             completionSection.style.display = 'block';
 
             const reviewContainer = document.getElementById('review-questions');
-            questions.forEach(q => {
+            questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
-		questionDiv.innerHTML = `<b>Pregunta ${index + 1}: ${q.question}</b><br>${q.options.map(option => {
-                const selectedAnswer = localStorage.getItem(`selectedAnswer_${q.question}`);  
-					if (option === q.answer) {
-						return `<span style="color: green;">${option}</span>`; 
-					} else if (option === selectedAnswer) {
-						return `<span style="color: red;">${option}</span>`;
-					}
-					return option;
+                questionDiv.innerHTML = `<b>Pregunta ${index + 1}: ${q.question}</b><br>${q.options.map(option => {
+                 const selectedAnswer = localStorage.getItem(`selectedAnswer_${q.question}`);  
+                    if (option === q.answer) {
+                        return `<span style="color: green;">${option}</span>`; 
+                    } else if (option === selectedAnswer) {
+                        return `<span style="color: red;">${option}</span>`;
+                    }
+                    return option;
                 }).join('<br>')}`;
                 reviewContainer.appendChild(questionDiv);
             });
         }
+
 		shuffleQuestions();
         loadQuestion();
     </script>
