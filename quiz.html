@@ -151,7 +151,7 @@
 		];
         let currentQuestionIndex = 0;
 		let timer;
-        let timeLeft = 10;
+        let timeLeft = 20;
 		
 		function shuffleQuestions() {
             questions.sort(() => Math.random() - 0.5);
@@ -159,7 +159,7 @@
 		
 		 function startTimer() {
             const timerElement = document.getElementById('quiz-timer');
-            timeLeft = 10; 
+            timeLeft = 20; 
             timerElement.textContent = timeLeft;
 
             clearInterval(timer); 
