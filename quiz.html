@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Vinos Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2C3E50, #4CA1AF);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px 0;
+        }
+        .tab-button {
+            background-color: #F26A21;
+            border: none;
+            color: white;
+			width: 80%;
+            padding: 15px 30px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tab-button:hover {
+            background-color: #D15A0E;
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+			margin: 0 auto;
+			width: 76%;
+        }
+		content {
+            display: none;
+            padding: 30px;           
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+			margin: 0 auto;
+			margin-bottom:10px;
+			margin-top:10px;
+			width: 76%;
+        }
+        .active-tab {
+            display: block;
+        }
+        .do-type {         
+            color: white;
+            padding: 20px;
+            margin: 15px auto;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: background-color 0.3s ease;
+			width: 80%;
+        }
+		.do-type:hover {
+            background-color: #2C3E50;
+        }
+        .vino-card {
+            background-color: #333;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .vino-card:hover {
+            transform: scale(1.05);
+        }
+	    .vino-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .vino-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .vino-card p {
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+        .vino-card .maridaje {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+		@media (max-width: 768px) {
+            .vino-card {
+                width: 90%;
+				margin:20px auto;
+            }
+        }
+		.tabs {
+            flex-direction: column;
+            align-items: center;
+        }
+		.quiz-question {
+            background-color: #333;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+			width: 80%;
+			margin: 20px auto;
+        }
+        .quiz-question:hover {
+            transform: scale(1.05);
+        }
+        .quiz-question h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .results {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+		.resutados{
+			
+		}
+		button {
+            background-color: #F26A21;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+		button:hover {
+            background-color: #D15A0E;
+        }
+		
+    </style>
+</head>
+<body>
+    <h1>Bienvenida a la App de Vinos</h1>
+    <div class="tabs">
+        <button class="tab-button" onclick="openTab('estudia')">Estudia</button>
+        <button class="tab-button" onclick="openTab('quiz')">Quiz</button>
+    </div>
+
+    <!-- Contenido de la pestaña: Información sobre vinos -->
+    <div id="estudia" class="tab-content">
+        <h2>Información sobre los Vinos</h2>
+        
+        <!-- Sección Jumilla -->
+       <div class="do-type" onclick="toggleDO('jumilla')">			
+			<img src="https://www.mrvinos.com/data/denominacion/37/logo-do-jumilla.jpg" alt="Icono Jumilla" style="width: 120px; height: 100px;">         
+       </div>
+        <div id="jumilla" class="content" style="display:none;">
+            <button onclick="showVinos('jumilla', 'tinto')">Tintos</button>
+            <button onclick="showVinos('jumilla', 'blanco')">Blancos</button>
+            <button onclick="showVinos('jumilla', 'dulce')">Dulces</button>
+            <div id="jumilla-tinto"></div>
+            <div id="jumilla-blanco"></div>
+            <div id="jumilla-dulce"></div>
+        </div>
+
+        <!-- Sección Yecla -->
+         <div class="do-type" onclick="toggleDO('yecla')">
+			<img src="https://seeklogo.com/images/D/dop-yecla-logo-E89DC1F182-seeklogo.com.png" alt="Icono Yecla" style="width: 120px; height: 100px;">  
+        </div>
+        <div id="yecla" class="content" style="display:none;">
+            <button onclick="showVinos('yecla', 'tinto')">Tintos</button>
+            <button onclick="showVinos('yecla', 'blanco')">Blancos</button>
+            <button onclick="showVinos('yecla', 'dulce')">Dulces</button>
+            <div id="yecla-tinto"></div>
+            <div id="yecla-blanco"></div>
+            <div id="yecla-dulce"></div>
+        </div>
+
+        <div class="do-type" onclick="toggleDO('bullas')">
+			<img src="https://www.regmurcia.com/servlet/integra.servlets.Imagenes?METHOD=VERIMAGEN_1816&nombre=Bullas_DOlogo_res_720.jpg" alt="Icono Bullas" style="width: 120px; height: 100px;">
+        </div>
+        <div id="bullas" class="content" style="display:none;">
+            <button onclick="showVinos('bullas', 'tinto')">Tintos</button>
+            <button onclick="showVinos('bullas', 'blanco')">Blancos</button>
+            <button onclick="showVinos('bullas', 'dulce')">Dulces</button>
+            <div id="bullas-tinto"></div>
+            <div id="bullas-blanco"></div>
+            <div id="bullas-dulce"></div>
+        </div>
+
+        <!-- Sección Cava -->
+        <div class="do-type" onclick="toggleDO('cava')">
+			<img src="https://www.elreydelcava.com/wp-content/uploads/2022/03/el-rey-del-cava-do-logo-cava-denominacion-origen.jpg" alt="Icono Cava" style="width: 170px; height: 100px;">
+        </div>
+        <div id="cava" class="content" style="display:none;">
+            <button onclick="showVinos('cava', 'blanco')">Blancos</button>
+            <button onclick="showVinos('cava', 'espumoso')">Espumosos</button>
+            <div id="cava-blanco"></div>
+            <div id="cava-espumoso"></div>
+        </div>
+    </div>
+
+    <script>
+    function openTab(tabName) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active-tab'));
+        document.getElementById(tabName).classList.add('active-tab');
+    }
+	
+    function toggleDO(doName) {
+		const doContent = document.getElementById(doName);        
+		const isVisible = doContent.style.display !== 'none';
+		doContent.style.display = isVisible ? 'none' : 'block';
+    }
+
+    function showVinos(doName, tipo) {
+		const container = document.getElementById(`${doName}-${tipo}`);
+		container.innerHTML = '';
+	
+        // Definir los datos de los vinos
+        const vinosData = {
+            'jumilla': {
+                'tinto': [
+                    {name: 'Valtosca', year: 2021, uva: 'Syrah', bodega: 'Casa Castillo', maridaje: 'Asados, carnes rojas a la parrilla.', catas: 'Notas frutales, buena acidez y final largo.'},
+                    {name: 'El molar', year: 2021, uva: 'Garnacha',bodega: 'Casa Castillo', maridaje: 'Embutidos, ibéricos, quesos curados, arroces.', catas: 'Fresco y sabroso. Buena  acidez y taninos  finos. Retronasal  afrutada.'},
+                    {name: 'La tendida', year: 2021, uva: 'Monastrell, Garnacha', bodega: 'Casa Castillo', maridaje: 'Arroces con carne, pasta, carnes.', catas: 'Taninos finos. Fresco, complejo y con fuerza. Notas a fruta madura.'},
+                    {name: 'Remordimiento', year: 2022, uva: 'Monastrell, Garnacha', bodega: 'Cerrón',  maridaje: 'Carnes, jamón, embutidos.', catas: 'Fresco, mineral y profundo.'},
+					{name: 'El timpo que nos une', year: '-', uva: 'Monastrell', bodega: 'Cerrón',  maridaje: '-', catas: '-'},
+                    {name: 'Juan Gil', year: 2021, uva: 'Monastrell', bodega: 'Juan Gil', maridaje: 'Carnes rojas asadas, embutidos, guisos.', catas: 'Goloso y elegante. Buen equilibrio entre fruta, alcohol y madera.'},
+                    {name: 'Arrogante', year: 2020, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Arrogante',  maridaje: '-', catas: 'Intensidad media, equilibrado y elegante. Sabor primario a fruta negra. Final largo.'},
+                    {name: 'Arrogante Magnum', year: 2021, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Arrogante', maridaje: '-', catas: 'Intensidad media, equilibrado y elegante. Sabor primario a fruta negra. Final largo.'},
+                ],
+                'blanco': [
+                    {name: 'Remordimiento Chardonnay', year: 2023, uva: 'Chardonnay', bodega: 'Cerrón', maridaje: 'Verduras, arroces, quesos semicurados.', catas: 'Suave, equilibrado y sabroso. Con equilibrio entre frescura y acidez'},
+                    {name: 'Juan Gil Moscatel', year: 2023, uva: 'Moscatel', bodega: 'Juan Gil', maridaje: 'Quesos blandos, pescado blanco, mariscos.', catas: 'Limpio y freso. Nota frutal con presencia de cítricos. Amable y largo final.'},
+                ],
+                'dulce': [
+                    {name: 'Casa Ermita', year: '-', uva: 'Monastrell', bodega: 'Casa de la Ermita', maridaje: 'Chocolate, pasteles, frutos secos, quesos.', catas: '-'},
+                ]
+            },
+            'yecla': {
+                'tinto': [
+                    {name: 'Lualma', year: 2019, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Barahonda',  maridaje: 'Guiso de carne roja, verduras, quesos curados.', catas: 'Sabor potente, goloso y equilibrado. Agradable final.'},
+                    {name: 'Casa del Capitán', year: 2022, uva: 'Monastrell', bodega: 'Barahonda', maridaje: 'Carnes rojas, quesos, legumbres, platos picantes.', catas: 'Sabor amable y sedoso. Matices a fruta roja y toques de roble francés.'},
+                    {name: 'El bicho raro', year: '-', uva: 'Garnacha', bodega: 'Barahonda',  maridaje: '-', catas: '-'},
+                    {name: 'De Nariz Terroir', year: '-', uva: 'Monastrell', bodega: 'De Nariz',  maridaje: '-', catas: '-'},				
+			   ],
+                'blanco': [
+                    {name: 'Casa del Capitán', year: '-', uva: 'Macabeo', bodega: 'Barahonda', maridaje: 'Quesos, mariscos.', catas: '-'},
+					{name: 'Organic Magnum', year: 2023, uva: 'Verdejo, Souvignon Blanc', bodega: 'Barahonda', maridaje: '-', catas: '-'},
+				],
+                'dulce': [
+                    {name: 'Do Bellum', year: 2018, uva: 'Monastrell', bodega: 'Barahonda', maridaje: 'Postres, quesos cremosos y duros.', catas: '-'},
+                ]
+            },
+            'bullas': {
+                'tinto': [
+                    {name: 'Negrete', year: '-', uva: 'Monastrell, Garnacha', bodega: 'Negrete Blue Wines', maridaje: '-', catas: '-'},
+                    {name: 'Lavia pueblo', year: '-', uva: 'Monastrell', bodega:'Lavia', maridaje: '-', catas: '-'},
+                    {name: 'Almudí', year: '-', uva: 'Monastrell', bodega:'Monastrell', maridaje: '-', catas: '-'},
+                ],
+                'blanco': [
+                    {name: 'Salto del Usero', year: 2022, uva: 'Macabeo', bodega: 'Monastrell', maridaje: 'Aperitivos, mariscos, pastas, quesos curados.', catas: '-'},
+                ],
+                'dulce': [
+                    {name: 'Chaveo Deshielo', year: '-', uva: 'Monastrell', bodega: 'Monastrell', maridaje: '-', catas: '-'},
+                ]
+            },
+            'cava': {
+                'blanco': [
+                    {name: 'Perelada Brut Reserva', year: '-', uva: 'Macabeo, Xarel.lo, Parellada', bodega:'Perelada', maridaje: 'Pescado, carnes blancas, verduras, marisco.'},
+                ],
+                'espumoso': [
+                    {name: 'Mirgin Brut Nature', year: '-', uva: 'Macabeo, Pansa blanca, Parellada', bodega: 'Alta Alella', maridaje: 'Pescados, mariscos.'},
+                ]
+            }
+        };
+
+        // Mostrar los vinos correspondientes
+        vinosData[doName][tipo].forEach(vino => {
+            const vinoCard = document.createElement('div');
+            vinoCard.classList.add('vino-card');
+            vinoCard.innerHTML = `
+                <h3 onclick="toggleVinoInfo('${doName}', '${tipo}', '${vino.name.replace(/\s/g, '')}')">${vino.name}</h3>
+                <div class="vino-info" id="${doName}-${tipo}-${vino.name.replace(/\s/g, '')}"style="display: none;">
+                    <p><strong>Año:</strong> ${vino.year}</p>
+                    <p><strong>Uva:</strong> ${vino.uva}</p>
+					<p><strong>Bodega:</strong> ${vino.bodega}</p>
+                    <p><strong>Maridaje:</strong> <span class="maridaje">${vino.maridaje}</span></p>
+					<p><strong>Notas de Cata:</strong> ${vino.catas}</p>
+                </div>
+            `;
+            container.appendChild(vinoCard);
+        });
+    }
+
+    function toggleVinoInfo(doName, tipo, vinoName) {
+        const vinoInfo = document.getElementById(`${doName}-${tipo}-${vinoName}`);
+        vinoInfo.style.display = (vinoInfo.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+	
+    <!-- Contenido de la pestaña: Quiz de vinos -->   
+		<div id="quiz" class="tab-content">
+	   <div id="quiz-questions"></div>
+			<button class="quiz-button" onclick="nextQuestions()">Siguiente</button>
+        <div class="results" id="quiz-results"></div>
+		 </div>
+    <script>
+    let questions = [
+        {question: '¿Qué uva se usa en el vino "Valtosca" de Jumilla?', options: ['Syrah', 'Tempranillo', 'Cabernet Sauvignon', 'Merlot'], answer: 'Syrah'},
+        {question: '¿Qué bodega produce el vino "El molar" de Jumilla?', options: ['Casa Castillo', 'Cerrón', 'Juan Gil', 'Barahonda'], answer: 'Casa Castillo'},
+        {question: '¿Qué vino de Jumilla tiene notas a fruta madura, flores y ahumados?', options: ['El tiempo que nos une', 'Remordimiento', 'La Tendida', 'Juan Gil'], answer: 'El tiempo que nos une'},
+        {question: '¿A qué maridaje es recomendado el vino "Arrogante" de Jumilla?', options: ['Embutidos, quesos curados', 'Verduras, mariscos', 'Carnes rojas', 'Pasteles y chocolate'], answer: 'Embutidos, quesos curados'},
+        {question: '¿Qué variedad de uva se utiliza en el vino "Remordimiento Chardonnay" de Jumilla?', options: ['Chardonnay', 'Moscatel', 'Syrah', 'Cabernet Sauvignon'], answer: 'Chardonnay'},
+        {question: '¿De qué denominación de origen es el vino "Lualma"?', options: ['Yecla', 'Jumilla', 'Bullas', 'Cava'], answer: 'Yecla'},
+        {question: '¿Cuál es la bodega productora del vino "De Nariz Terroir"?', options: ['Barahonda', 'Juan Gil', 'De Nariz', 'Cerrón'], answer: 'De Nariz'},
+        {question: '¿Qué vino de la DO Bullas es recomendado para maridar con mariscos?', options: ['Salto del Usero', 'Almudí', 'Lavia Pueblo', 'Negrete'], answer: 'Salto del Usero'},
+        {question: '¿Qué vino de la DO Cava es espumoso?', options: ['Perelada Brut Reserva', 'Mirgin Brut Nature', 'Juan Gil', 'Arrogante'], answer: 'Mirgin Brut Nature'},
+        {question: '¿Qué uva se usa en el vino "Casa del Capitán" de Yecla?', options: ['Monastrell', 'Cabernet Sauvignon', 'Chardonnay', 'Macabeo'], answer: 'Monastrell'},
+        {question: '¿Qué tipo de vino es el "Juan Gil" de Jumilla?', options: ['Tinto', 'Blanco', 'Dulce', 'Rosado'], answer: 'Tinto'},
+        {question: '¿Qué es un vino con DO Jumilla?', options: ['Vino de calidad certificado de Jumilla', 'Vino sin denominación', 'Vino de uva temprana', 'Vino ecológico'], answer: 'Vino de calidad certificado de Jumilla'},
+        {question: '¿Cuál es el color característico del vino "El Molar"?', options: ['Rojo intenso con reflejos violáceos', 'Amarillo paja', 'Rojo cereza', 'Cítrico'], answer: 'Rojo intenso con reflejos violáceos'},
+        {question: '¿Qué notas de cata destacan en el vino "La Tendida"?', options: ['Fruta roja, florales y especias', 'Fruta madura, ahumados', 'Fruta roja y moras', 'Notas de madera y tierra'], answer: 'Fruta roja, florales y especias'},
+        {question: '¿Qué vino de Jumilla tiene un final largo y elegante?', options: ['El tiempo que nos une', 'Remordimiento', 'Juan Gil', 'Arrogante'], answer: 'El tiempo que nos une'},
+        {question: '¿Qué tipo de vino es el "Juan Gil"?', options: ['Tinto', 'Blanco', 'Dulce', 'Rosado'], answer: 'Tinto'},
+        {question: '¿Cuál es el nombre del vino de Jumilla con un color rojo rubí y notas de fruta negra?', options: ['Juan Gil', 'Valtosca', 'El Tiempo que nos Une', 'Remordimiento'], answer: 'Juan Gil'},
+        {question: '¿Qué variedad de uva se utiliza en el vino "Arrogante" de Jumilla?', options: ['Monastrell', 'Cabernet Sauvignon', 'Syrah', 'Macabeo'], answer: 'Monastrell'},
+        {question: '¿Qué vino de la DO Cava es conocido por su frescura y burbujas elegantes?', options: ['Mirgin Brut Nature', 'Perelada Brut Reserva', 'Lavia', 'Barahonda'], answer: 'Mirgin Brut Nature'},
+        {question: '¿Cómo se describe el vino "Juan Gil" en términos de sabor?', options: ['Frutal, equilibrado, con taninos pulidos', 'Ácido, amargo, suave', 'Dulce, afrutado, floral', 'Ahumado, robusto, intenso'], answer: 'Frutal, equilibrado, con taninos pulidos'},
+        {question: '¿Qué tipo de vino se produce en la DO Yecla?', options: ['Tinto y rosado', 'Blanco y dulce', 'Espumoso', 'Dulce y seco'], answer: 'Tinto y rosado'}
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+	let userAnswers = [];
+	
+	function loadQuiz() {
+        const quizContainer = document.getElementById('quiz-questions');
+        quizContainer.innerHTML = '';
+        const question = questions[currentQuestionIndex];
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('quiz-question');
+        questionElement.innerHTML = `
+            <h3>${question.question}</h3>
+            ${question.options.map((option, index) => `
+                <div class="quiz-option">
+                    <input type="radio" id="option-${index}" name="question-${currentQuestionIndex}" value="${option}">
+                    <label for="option-${index}">${option}</label>
+                </div>
+            `).join('')}
+        `;
+        quizContainer.appendChild(questionElement);
+    }
+	
+	 // Mezclar las preguntas aleatoriamente al iniciar el quiz
+    function shuffleQuestions() {
+        questions = questions.sort(() => Math.random() - 0.5);
+    }
+
+    function nextQuestions() {
+        const selectedOption = document.querySelector(`input[name="question-${currentQuestionIndex}"]:checked`);
+        if (selectedOption) {
+            userAnswers[currentQuestionIndex] = selectedOption.value;
+        } else {
+            userAnswers[currentQuestionIndex] = null;
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuiz();
+        } else {
+            showResults();
+        }
+    }
+
+	    function showResults() {
+    const resultsContainer = document.getElementById('quiz-results');
+    resultsContainer.innerHTML = '<h3>Resultados del Quiz:</h3>';
+    questions.forEach((question, index) => {
+        const userAnswer = userAnswers[index];
+        const questionResult = document.createElement('div');
+        questionResult.classList.add('quiz-question');
+        questionResult.innerHTML = `
+            <h3>${question.question}</h3>
+            <div class="resutados">
+                ${question.options.map(option => {
+                    let color = '';
+
+                    if (userAnswer === question.answer) {
+                        // Si la respuesta seleccionada es correcta
+                        if (userAnswer === option) {
+                            color = 'green';  // Respuesta correcta seleccionada
+                        } else if (option === question.answer) {
+                            color = 'green';  // Respuesta correcta pero no seleccionada
+                        }
+                    } else {
+                        // Si la respuesta seleccionada es incorrecta
+                        if (userAnswer === option) {
+                            color = 'red';  // Respuesta incorrecta seleccionada
+                        } else if (option === question.answer) {
+                            color = 'green';  // Respuesta correcta, no seleccionada
+                        }
+                    }
+
+                    return `<div style="color:${color};">${option}</div>`;
+                }).join('')}
+            </div>
+        `;
+        resultsContainer.appendChild(questionResult);
+    });
+}
+
+	
+    function showQuestion() {
+        const question = questions[currentQuestionIndex];
+        const questionElement = document.createElement('div');
+        const questionContainer = document.getElementById("quiz-questions");
+        questionElement.innerHTML = `
+            <h3>${question.question}</h3>
+            ${question.options.map((option, i) => `
+                <button onclick="checkAnswer('${option}', ${i})">${option}</button>
+            `).join('')}
+        `;
+        document.getElementById('quiz-questions').innerHTML = '';
+        document.getElementById('quiz-questions').appendChild(questionElement);
+    }
+
+    function checkAnswer(selectedAnswer, index) {
+        const correctAnswer = questions[currentQuestionIndex].answer;
+        if (selectedAnswer === correctAnswer) {
+            score++;
+        }
+        currentQuestionIndex++;
+        nextQuestions();
+    }
+    shuffleQuestions();
+    nextQuestions();
+    </script>
+</body>
+</html>
+
