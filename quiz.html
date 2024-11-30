@@ -240,7 +240,7 @@
             const reviewContainer = document.getElementById('review-questions');
             questions.forEach(q => {
                 const questionDiv = document.createElement('div');
-                questionDiv.innerHTML = `<b>${q.question}</b><br><br>${q.options.map(option => {
+                questionDiv.innerHTML = `<b>${q.question}</b><br>${q.options.map(option => {
                  const selectedAnswer = localStorage.getItem(`selectedAnswer_${q.question}`);  
 					if (option === q.answer) {
 						return `<span style="color: green;">${option}</span>`; 
@@ -248,7 +248,7 @@
 						return `<span style="color: red;">${option}</span>`;
 					}
 					return option;
-                }).join('<br>')}`;
+                }).join('<br><br>')}`;
                 reviewContainer.appendChild(questionDiv);
             });
         }
