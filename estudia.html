@@ -370,6 +370,15 @@
             `;
             container.appendChild(vinoCard);
         });
+            // Asegurar que no se muestren resultados de otros tipos de vino en el mismo DO
+        ['tinto', 'blanco', 'dulce', 'espumoso'].forEach(t => {
+            if (t !== tipo) {
+                const otherContainer = document.getElementById(`${doName}-${t}`);
+                if (otherContainer) {
+                    otherContainer.innerHTML = '';
+                }
+            }
+        });
     }
 
     function toggleVinoInfo(doName, tipo, vinoName) {
