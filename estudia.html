@@ -10,7 +10,7 @@
     
 	body {
         font-family: 'Raleway', sans-serif;
-        background: linear-gradient(to right, #4B0016, #550033); /* Tonos vino */
+        background: linear-gradient(to right, #4B0016, #550033); 
         color: #fff;
         text-align: center;
         margin: 0;
@@ -22,15 +22,15 @@
         font-size: 2.5rem;
         margin-bottom: 20px;
        
-		font-family: 'Playfair Display', serif; /* Fuente elegante */
+		font-family: 'Playfair Display', serif; 
         font-size: 3rem;
 		color: #FFD700; /* Amarillo dorado */
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
         transition: color 0.3s ease, transform 0.3s ease;
     }
 	 h2:hover {
-        color: #FFC0CB; /* Rosa pastel en hover */
-        transform: scale(1.05); /* Ligeramente más grande */
+        color: #FFC0CB; 
+        transform: scale(1.05);
     }
     .tabs {
         display: flex;
@@ -58,7 +58,7 @@
         display: block;
     }
     .do-type {
-        background: linear-gradient(to right, #8B0000, #4B0082); /* Botones dinámicos */
+        background: linear-gradient(to right, #8B0000, #4B0082); 
         color: white;
         padding: 20px;
         margin: 15px auto;
@@ -70,24 +70,24 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
     .do-type:hover {
-        background: linear-gradient(to right, #B22222, #6A0DAD); /* Resalte */
+        background: linear-gradient(to right, #B22222, #6A0DAD); 
         transform: scale(1.05);
     }
       .vino-card {
-        background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+        background: rgba(255, 255, 255, 0.1); 
         padding: 20px;
         margin: 20px auto;
         border-radius: 12px;
         cursor: pointer;
         transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
-        width: 90%; /* Ajuste dinámico de ancho */
+        width: 90%; 
         position: relative;
         overflow: hidden;
     }
     .vino-card:hover {
-        background: rgba(255, 255, 255, 0.2); /* Resalte translúcido */
-        transform: scale(1.05) rotate(1deg); /* Zoom + rotación ligera */
+        background: rgba(255, 255, 255, 0.2); 
+        transform: scale(1.05) rotate(1deg);
         box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
     }
 
@@ -101,27 +101,27 @@
     }
 
     .vino-card:hover img {
-        transform: scale(1.1); /* Zoom en la imagen */
-        filter: brightness(1.2); /* Brillo en hover */
+        transform: scale(1.1); 
+        filter: brightness(1.2);
     }
 
     .vino-card h3 {
-        font-family: 'Playfair Display', serif; /* Fuente elegante */
+        font-family: 'Playfair Display', serif; 
         margin-bottom: 10px;
         font-size: 1.8rem;
-        color: #FFC0CB; /* Rosa pastel */
+        color: #FFC0CB;
         text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
         transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
     }
 
     .vino-card:hover h3 {
-        transform: translateY(-5px); /* Desplazamiento hacia arriba */
-        color: #FFD700; /* Amarillo dorado en hover */
+        transform: translateY(-5px); 
+        color: #FFD700; 
         text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     }
 
     .vino-card p {
-        font-family: 'Raleway', sans-serif; /* Fuente más limpia */
+        font-family: 'Raleway', sans-serif; 
         font-size: 1.2rem;
         margin: 10px 0;
         color: #ddd;
@@ -130,27 +130,27 @@
     }
 
     .vino-card:hover p {
-        opacity: 1; /* Mayor visibilidad */
-        color: #fff; /* Blanco en hover */
-        transform: translateY(5px); /* Desplazamiento hacia abajo */
+        opacity: 1; 
+        color: #fff; 
+        transform: translateY(5px); 
     }
 
     .vino-card .maridaje {
         font-style: italic;
-        font-family: 'Playfair Display', serif; /* Fuente elegante */
-        color: #FFD700; /* Amarillo dorado */
+        font-family: 'Playfair Display', serif; 
+        color: #FFD700; 
         font-size: 1.1rem;
         opacity: 0.8;
         transition: opacity 0.4s ease, transform 0.4s ease, color 0.4s ease;
     }
 
     .vino-card:hover .maridaje {
-        opacity: 1; /* Más visible en hover */
-        color: #FFC0CB; /* Rosa pastel */
-        transform: scale(1.05); /* Ligero zoom */
+        opacity: 1; 
+        color: #FFC0CB; 
+        transform: scale(1.05); 
     }
 
-    /* Efecto visual dinámico en hover */
+    
     .vino-card::before {
         content: "";
         position: absolute;
@@ -165,10 +165,10 @@
     }
 
     .vino-card:hover::before {
-        transform: translateX(100%) rotate(45deg); /* Movimiento radial */
+        transform: translateX(100%) rotate(45deg); 
     }
 
-    /* Asegurar que el contenido esté sobre el efecto visual */
+    
     .vino-card * {
         position: relative;
         z-index: 1;
@@ -224,7 +224,7 @@
 
 </head>
 <body>
-    <!-- Contenido de la pestaña: Información sobre vinos -->
+ 
     <div id="estudia" class="tab-content active-tab">
         <h2>Carta de Vinos</h2>
         
@@ -370,7 +370,7 @@
             `;
             container.appendChild(vinoCard);
         });
-            // Asegurar que no se muestren resultados de otros tipos de vino en el mismo DO
+            // Asegurar que no se muestren resultados de otros tipos de vino en el mismo DO // sigue sin funcionar: MIRAR DESPUES
         ['tinto', 'blanco', 'dulce', 'espumoso'].forEach(t => {
             if (t !== tipo) {
                 const otherContainer = document.getElementById(`${doName}-${t}`);
