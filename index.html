@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Vinos Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #2C3E50, #4CA1AF);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+			width:90%;
+			height: 100vh;
+			background-image: url('fondoInicio.jpg');			
+			background-position: center 12%;
+			background-size: 90vw 80vh;
+			background-repeat: no-repeat;				
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        div {
+            display: block;
+            justify-content: center;          
+            flex-direction: column;
+            align-items: center;
+			margin-left:10%;
+			width: 80%;           
+            position: absolute; /* Para que los botones se alineen abajo */
+            bottom:5%; /* 30px desde la parte inferior de la pantalla */			
+        }
+        button {
+            background: linear-gradient(90deg, #8B0000, #4B0082);
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 20px;
+			width:80%;	
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        button:hover {
+           background: linear-gradient(90deg, #B22222, #6A0DAD); /* Tonos más claros en hover */
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body> 
+    
+    <div>
+        <a href="estudia.html">
+            <button>Estudia</button>
+        </a>
+        <a href="quiz.html">
+            <button >Quiz</button>
+        </a>
+    </div>
+</body>
+</html>
+
+
