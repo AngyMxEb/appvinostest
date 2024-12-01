@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Vinos Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+	   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;600&display=swap');
+    
+	body {
+        font-family: 'Raleway', sans-serif;
+        background: linear-gradient(to right, #4B0016, #550033); /* Tonos vino */
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+    }
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+       
+		font-family: 'Playfair Display', serif; /* Fuente elegante */
+        font-size: 3rem;
+		color: #FFD700; /* Amarillo dorado */
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+	 h2:hover {
+        color: #FFC0CB; /* Rosa pastel en hover */
+        transform: scale(1.05); /* Ligeramente más grande */
+    }
+    .tabs {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    .tab-content {
+        padding: 30px;
+        margin: auto;
+        width: 80%;      
+    }
+    content {
+        display: none;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        margin: 0 auto;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        width: 76%;		
+    }
+    .active-tab {
+        display: block;
+    }
+    .do-type {
+        background: linear-gradient(to right, #8B0000, #4B0082); /* Botones dinámicos */
+        color: white;
+        padding: 20px;
+        margin: 15px auto;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.4rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 80%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .do-type:hover {
+        background: linear-gradient(to right, #B22222, #6A0DAD); /* Resalte */
+        transform: scale(1.05);
+    }
+      .vino-card {
+        background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+        width: 90%; /* Ajuste dinámico de ancho */
+        position: relative;
+        overflow: hidden;
+    }
+    .vino-card:hover {
+        background: rgba(255, 255, 255, 0.2); /* Resalte translúcido */
+        transform: scale(1.05) rotate(1deg); /* Zoom + rotación ligera */
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .vino-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .vino-card:hover img {
+        transform: scale(1.1); /* Zoom en la imagen */
+        filter: brightness(1.2); /* Brillo en hover */
+    }
+
+    .vino-card h3 {
+        font-family: 'Playfair Display', serif; /* Fuente elegante */
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #FFC0CB; /* Rosa pastel */
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .vino-card:hover h3 {
+        transform: translateY(-5px); /* Desplazamiento hacia arriba */
+        color: #FFD700; /* Amarillo dorado en hover */
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .vino-card p {
+        font-family: 'Raleway', sans-serif; /* Fuente más limpia */
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #ddd;
+        opacity: 0.9;
+        transition: opacity 0.4s ease, transform 0.4s ease, color 0.4s ease;
+    }
+
+    .vino-card:hover p {
+        opacity: 1; /* Mayor visibilidad */
+        color: #fff; /* Blanco en hover */
+        transform: translateY(5px); /* Desplazamiento hacia abajo */
+    }
+
+    .vino-card .maridaje {
+        font-style: italic;
+        font-family: 'Playfair Display', serif; /* Fuente elegante */
+        color: #FFD700; /* Amarillo dorado */
+        font-size: 1.1rem;
+        opacity: 0.8;
+        transition: opacity 0.4s ease, transform 0.4s ease, color 0.4s ease;
+    }
+
+    .vino-card:hover .maridaje {
+        opacity: 1; /* Más visible en hover */
+        color: #FFC0CB; /* Rosa pastel */
+        transform: scale(1.05); /* Ligero zoom */
+    }
+
+    /* Efecto visual dinámico en hover */
+    .vino-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 70%);
+        transform: translateX(-100%) rotate(30deg);
+        transition: transform 0.7s ease;
+        z-index: 0;
+    }
+
+    .vino-card:hover::before {
+        transform: translateX(100%) rotate(45deg); /* Movimiento radial */
+    }
+
+    /* Asegurar que el contenido esté sobre el efecto visual */
+    .vino-card * {
+        position: relative;
+        z-index: 1;
+    }
+    button {
+        background: linear-gradient(to right, #8B0000, #4B0082);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+		
+    }
+
+    button:hover {
+        background: linear-gradient(to right, #B22222, #6A0DAD);
+        transform: scale(1.05);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .divVolver {
+        display: relative;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;       
+		margin-bottom:20%;
+		margin-left:25%;
+    }
+    .volver {
+        background: linear-gradient(90deg, #8B0000, #4B0082);
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        width: 80%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .volver:hover {
+        background: linear-gradient(90deg, #B22222, #6A0DAD);
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+</style>
+
+</head>
+<body>
+    <!-- Contenido de la pestaña: Información sobre vinos -->
+    <div id="estudia" class="tab-content active-tab">
+        <h2>Servicio de Vinos</h2>
+        
+        <!-- Sección Jumilla -->
+       <div class="do-type" onclick="toggleDO('jumilla')">			
+			<h2>El vino</h2>
+       </div>
+        <div id="jumilla" class="content" style="display:none;">
+            <button onclick="showVinos('jumilla', 'tinto')">Elaboración</button>
+            <button onclick="showVinos('jumilla', 'blanco')">Tipos</button>
+            <button onclick="showVinos('jumilla', 'dulce')">Denominaciones de Origen</button>
+            <div id="jumilla-tinto"></div>
+            <div id="jumilla-blanco"></div>
+            <div id="jumilla-dulce"></div>
+        </div>
+
+        <!-- Sección Yecla -->
+         <div class="do-type" onclick="toggleDO('yecla')">
+			<h2>Cata de Vino</h2>
+		</div>
+        <div id="yecla" class="content" style="display:none;">
+            <button onclick="showVinos('yecla', 'tinto')">La cata</button>
+            <button onclick="showVinos('yecla', 'blanco')">Fases</button>
+            <button onclick="showVinos('yecla', 'dulce')">Alteraciones y defectos</button>
+            <div id="yecla-tinto"></div>
+            <div id="yecla-blanco"></div>
+            <div id="yecla-dulce"></div>
+        </div>
+
+        <div class="do-type" onclick="toggleDO('bullas')">
+			<h2>Maridaje</h2>
+		</div>
+        <div id="bullas" class="content" style="display:none;">
+            <button onclick="showVinos('bullas', 'tinto')">Tipos y normas</button>
+            <button onclick="showVinos('bullas', 'blanco')">Decantación</button>
+            <button onclick="showVinos('bullas', 'dulce')">Aprovisionamiento y conservacion</button>
+            <div id="bullas-tinto"></div>
+            <div id="bullas-blanco"></div>
+            <div id="bullas-dulce"></div>
+        </div>
+
+        <!-- Sección Cava -->
+        <div class="do-type" onclick="toggleDO('cava')">
+			<h2>Servicio</h2>
+	    </div>
+        <div id="cava" class="content" style="display:none;">
+            <button onclick="showVinos('cava', 'blanco')">Definición</button>
+            <button onclick="showVinos('cava', 'espumoso')">Combinaciones</button>
+            <div id="cava-blanco"></div>
+            <div id="cava-espumoso"></div>
+        </div>
+    </div>
+
+    <script>
+    function openTab(tabName) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active-tab'));
+        document.getElementById(tabName).classList.add('active-tab');
+    }
+	
+    function toggleDO(doName) {
+		const doContent = document.getElementById(doName);        
+		const isVisible = doContent.style.display !== 'none';
+		doContent.style.display = isVisible ? 'none' : 'block';
+    }
+
+    function showVinos(doName, tipo) {
+		const container = document.getElementById(`${doName}-${tipo}`);
+		container.innerHTML = '';
+	
+        // Definir los datos de los vinos
+        const vinosData = {
+            'jumilla': {
+                'tinto': [
+                    {name: 'Valtosca', year: 2021, uva: 'Syrah', bodega: 'Casa Castillo', maridaje: 'Asados, carnes rojas a la parrilla.', catas: 'Notas frutales, buena acidez y final largo.'},
+                    {name: 'El molar', year: 2021, uva: 'Garnacha',bodega: 'Casa Castillo', maridaje: 'Embutidos, ibéricos, quesos curados, arroces.', catas: 'Fresco y sabroso. Buena  acidez y taninos  finos. Retronasal  afrutada.'},
+                    {name: 'La tendida', year: 2021, uva: 'Monastrell, Garnacha', bodega: 'Casa Castillo', maridaje: 'Arroces con carne, pasta, carnes.', catas: 'Taninos finos. Fresco, complejo y con fuerza. Notas a fruta madura.'},
+                    {name: 'Remordimiento', year: 2022, uva: 'Monastrell, Garnacha', bodega: 'Cerrón',  maridaje: 'Carnes, jamón, embutidos.', catas: 'Fresco, mineral y profundo.'},
+					{name: 'El timpo que nos une', year: '-', uva: 'Monastrell', bodega: 'Cerrón',  maridaje: '-', catas: '-'},
+                    {name: 'Juan Gil', year: 2021, uva: 'Monastrell', bodega: 'Juan Gil', maridaje: 'Carnes rojas asadas, embutidos, guisos.', catas: 'Goloso y elegante. Buen equilibrio entre fruta, alcohol y madera.'},
+                    {name: 'Arrogante', year: 2020, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Arrogante',  maridaje: '-', catas: 'Intensidad media, equilibrado y elegante. Sabor primario a fruta negra. Final largo.'},
+                    {name: 'Arrogante Magnum', year: 2021, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Arrogante', maridaje: '-', catas: 'Intensidad media, equilibrado y elegante. Sabor primario a fruta negra. Final largo.'},
+                ],
+                'blanco': [
+                    {name: 'Remordimiento Chardonnay', year: 2023, uva: 'Chardonnay', bodega: 'Cerrón', maridaje: 'Verduras, arroces, quesos semicurados.', catas: 'Suave, equilibrado y sabroso. Con equilibrio entre frescura y acidez'},
+                    {name: 'Juan Gil Moscatel', year: 2023, uva: 'Moscatel', bodega: 'Juan Gil', maridaje: 'Quesos blandos, pescado blanco, mariscos.', catas: 'Limpio y freso. Nota frutal con presencia de cítricos. Amable y largo final.'},
+                ],
+                'dulce': [
+                    {name: 'Casa Ermita', year: '-', uva: 'Monastrell', bodega: 'Casa de la Ermita', maridaje: 'Chocolate, pasteles, frutos secos, quesos.', catas: '-'},
+                ]
+            },
+            'yecla': {
+                'tinto': [
+                    {name: 'Lualma', year: 2019, uva: 'Monastrell, Syrah, Garnacha', bodega: 'Barahonda',  maridaje: 'Guiso de carne roja, verduras, quesos curados.', catas: 'Sabor potente, goloso y equilibrado. Agradable final.'},
+                    {name: 'Casa del Capitán', year: 2022, uva: 'Monastrell', bodega: 'Barahonda', maridaje: 'Carnes rojas, quesos, legumbres, platos picantes.', catas: 'Sabor amable y sedoso. Matices a fruta roja y toques de roble francés.'},
+                    {name: 'El bicho raro', year: '-', uva: 'Garnacha', bodega: 'Barahonda',  maridaje: '-', catas: '-'},
+                    {name: 'De Nariz Terroir', year: '-', uva: 'Monastrell', bodega: 'De Nariz',  maridaje: '-', catas: '-'},				
+			   ],
+                'blanco': [
+                    {name: 'Casa del Capitán', year: '-', uva: 'Macabeo', bodega: 'Barahonda', maridaje: 'Quesos, mariscos.', catas: '-'},
+					{name: 'Organic Magnum', year: 2023, uva: 'Verdejo, Souvignon Blanc', bodega: 'Barahonda', maridaje: '-', catas: '-'},
+				],
+                'dulce': [
+                    {name: 'Do Bellum', year: 2018, uva: 'Monastrell', bodega: 'Barahonda', maridaje: 'Postres, quesos cremosos y duros.', catas: '-'},
+                ]
+            },
+            'bullas': {
+                'tinto': [
+                    {name: 'Negrete', year: '-', uva: 'Monastrell, Garnacha', bodega: 'Negrete Blue Wines', maridaje: '-', catas: '-'},
+                    {name: 'Lavia pueblo', year: '-', uva: 'Monastrell', bodega:'Lavia', maridaje: '-', catas: '-'},
+                    {name: 'Almudí', year: '-', uva: 'Monastrell', bodega:'Monastrell', maridaje: '-', catas: '-'},
+                ],
+                'blanco': [
+                    {name: 'Salto del Usero', year: 2022, uva: 'Macabeo', bodega: 'Monastrell', maridaje: 'Aperitivos, mariscos, pastas, quesos curados.', catas: '-'},
+                ],
+                'dulce': [
+                    {name: 'Chaveo Deshielo', year: '-', uva: 'Monastrell', bodega: 'Monastrell', maridaje: '-', catas: '-'},
+                ]
+            },
+            'cava': {
+                'blanco': [
+                    {name: 'Perelada Brut Reserva', year: '-', uva: 'Macabeo, Xarel.lo, Parellada', bodega:'Perelada', maridaje: 'Pescado, carnes blancas, verduras, marisco.'},
+                ],
+                'espumoso': [
+                    {name: 'Mirgin Brut Nature', year: '-', uva: 'Macabeo, Pansa blanca, Parellada', bodega: 'Alta Alella', maridaje: 'Pescados, mariscos.'},
+                ]
+            }
+        };
+
+        // Mostrar los vinos correspondientes
+        vinosData[doName][tipo].forEach(vino => {
+            const vinoCard = document.createElement('div');
+            vinoCard.classList.add('vino-card');
+            vinoCard.innerHTML = `
+                <h3 onclick="toggleVinoInfo('${doName}', '${tipo}', '${vino.name.replace(/\s/g, '')}')">${vino.name}</h3>
+                <div class="vino-info" id="${doName}-${tipo}-${vino.name.replace(/\s/g, '')}"style="display: none;">
+                    <p><strong>Año:</strong> ${vino.year}</p>
+                    <p><strong>Uva:</strong> ${vino.uva}</p>
+					<p><strong>Bodega:</strong> ${vino.bodega}</p>
+                    <p><strong>Maridaje:</strong> <span class="maridaje">${vino.maridaje}</span></p>
+					<p><strong>Notas de Cata:</strong> ${vino.catas}</p>
+                </div>
+            `;
+            container.appendChild(vinoCard);
+        });
+           // Asegurar que no se muestren resultados de otros tipos de vino en el mismo DO
+        ['tinto', 'blanco', 'dulce', 'espumoso'].forEach(t => {
+            if (t !== tipo) {
+                const otherContainer = document.getElementById(`${doName}-${t}`);
+                if (otherContainer) {
+                    otherContainer.innerHTML = '';
+                }
+            }
+        });
+    }
+
+    function toggleVinoInfo(doName, tipo, vinoName) {
+        const vinoInfo = document.getElementById(`${doName}-${tipo}-${vinoName}`);
+        vinoInfo.style.display = (vinoInfo.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+	
+	
+    <!-- VOLVER A INICIO -->   		
+	   <div class="divVolver">
+			<a href="index.html"> <button class="volver" >Inicio</button> </a>
+        </div>
+		    
+</body>
+</html>
+
