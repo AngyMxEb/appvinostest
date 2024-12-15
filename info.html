@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Vino - App Interactiva</title>
+	<style>
+	   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;600&display=swap');
+    
+    <style>
+		* {
+			font-family: 'Roboto', sans-serif;
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background: #d8b5a2;
+			color: #fff;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+		h2 {
+			font-size: 2rem;
+			margin-bottom: 30px;
+			margin-top:20px;
+			color: #800020;
+		   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+		}
+		h2:hover {
+			transform: scale(1);
+			text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+		}
+		h3 {
+			font-size: 1rem;
+			margin-bottom:5px;
+			color: #800020;
+		   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+		   text-align:center;
+		}
+		h3:hover {
+			transform: scale(1);
+			text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+		}
+        .button, .sub-button {
+            background: #a41a4e;
+            color: white;
+            padding: 12px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            width: 70%;
+            margin: 10px auto;
+            text-align: center;
+            border: none;
+        }
+		.button:hover, .sub-button:hover {
+            transform: scale(1.05); 
+            background-color: #b31c56; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+        }
+        .content-section {         
+            color: #800020;
+            display: none; 
+			padding: 24px;
+			border-radius: 12px;
+			box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+			margin: 0 auto;
+			margin-bottom: 16px;
+			margin-top: 8px;
+			width: 70%;       
+		}
+		.content-section2 {         
+            color: #800020;
+            display: none; 
+			padding: 24px;			
+			margin: 6px 10px;		
+		}
+        .section-container {
+            margin-bottom: 20px;
+			
+        }		
+		.info-card {
+			background:rgba(128, 0, 32, 0.2);  
+			padding: 16px;
+			margin: 16px auto;
+			border-radius: 12px;
+			cursor: pointer;
+			transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+			box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+			width: 90%;
+			position: relative;
+			overflow: hidden;
+			text-align:left
+		}		
+		.info-card:hover {
+			background: rgba(255, 182, 193, 0.3);
+			transform: scale(1.05);
+			box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+		}
+		.info-cardS:hover {
+			background: rgba(255, 182, 193, 0.3);
+			transform: scale(1.05);
+			box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+		}
+		.info-card p {
+		color: white; 
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+		}
+		.info-cardS p {
+		color: #fffaf0; 
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+		}
+		.info-cardS {
+			background:rgba(128, 0, 32, 0.2);  
+			padding: 16px;
+			margin: 16px auto;
+			border-radius: 12px;
+			cursor: pointer;
+			transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+			box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+			width:70%;
+			position: relative;
+			overflow: hidden;
+		}
+		li{
+			color:white;
+		}
+	    .volver {
+        background: #a41a4e;
+        border: none;
+        color: white;
+        padding:10px; 
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        width: 40%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+		bottom:20px;
+		}
+		.volver:hover {
+			background: #b31c56;
+			transform: scale(1.05);
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+		}
+		img {
+		  width: 100%;
+		  max-width: 100px;
+		  max-height: 100px;
+		  object-fit: cover;
+		  }
+		  ul,li{
+			text-align:left
+		  }
+		  
+    </style>
+</head>
+<body>
+    <h2>Servicio de Vino</h2>
+
+    <!-- Sección principal: El vino -->
+
+    <div class="section-container">
+
+        <button class="button" onclick="toggleSection('elvino')"><img src="./vino.png" alt="Icono vino"> El Vino</button>
+        <div id="elvino" class="content-section">
+            
+            <!-- Sección 1.1: Elaboración -->
+            <div class="section-container">
+                <button class="button" onclick="toggleSection('elaboracion')">1. Elaboración</button>
+                <div id="elaboracion" class="content-section2">
+                    <button class="sub-button" onclick="toggleSubSection('ciclo-vid')">Ciclo Vegetativo de la Vid</button>
+                    <div id="ciclo-vid" class="content-section info-card">
+                        <p> LA VID: Planta cuyo fruto es la uva, de la cual se extrae el vino.
+						<h3>Ciclo vegetativo de la Vid</h3>
+							<ul>
+								<li><strong>Diciembre - Febrero:</strong> Fase de reposo de la vid.</li>
+								<li><strong>Marzo:</strong> "Lloro de la vid"; la planta da señales de vida, y sale savia por los cortes de la poda.</li>
+								<li><strong>Abril:</strong> Desborre; las yemas hinchan y aparecen racimos y hojas.</li>
+								<li><strong>Mayo:</strong> Brote y poda en verde; aparecen hojas, pero se eliminan algunas para oxigenar los racimos.</li>
+								<li><strong>Junio:</strong> Floración; aparecen los primeros racimos y se realizan operaciones como el desniete,eliminación de hojas para favorecer su desarrollo.</li>
+								<li><strong>Julio:</strong> Crecimiento del fruto; la uva aumenta en peso y azúcar, manteniendo alta la acidez.</li>
+								<li><strong>Agosto:</strong> Envero; las uvas adquieren color, maduran y los pámpanos se convierten en sarmientos.</li>
+								<li><strong>Septiembre:</strong> Preparación y comienzo de la vendimia; se mide la madurez de las uvas.</li>
+								<li><strong>Octubre:</strong> Finaliza la vendimia; las uvas alcanzan su máxima calidad.</li>
+								<li><strong>Noviembre:</strong> Caída de hojas; la vid entra en reposo tras la poda.</li>
+							</ul>
+						</p>
+                    </div>
+
+                    <button class="sub-button" onclick="toggleSubSection('la-uva')"> La Uva</button>
+							<div id="la-uva" class="content-section2 info-card">																
+									<h3>Partes de la uva</h3>
+									<ul>
+										<li><strong>Raspón:</strong> Une las uvas al racimo, a través de él llegan a las uvas los nutrientes y aporta taninos al vino</li>
+										<li><strong>Pruina:</strong>  Capa cerosa que protege del sol y retiene agua; sujeta levaduras para la fermentación.</li>
+										<li><strong>Pulpa: </strong> Contiene agua, azúcares (glucosa y fructosa), ácidos y vitaminas; representa el 75% del volumen.</li>
+										<li><strong>Hollejo/Piel: </strong> Constituye el 20% del fruto; aporta pigmentos y aromas al vino.</li>
+										<li><strong>Pepita: </strong> Semillas que aportan taninos, proporcionando amargor y estructura al vino; representa el 5%.</li>										
+									</ul>
+									<p><strong>Taninos:</strong> Sustancias químicas naturales, vegetales, que dan amargor, sequedad y aspereza al vino </p>									
+																														
+									<h3>Variedades de uva</h3>
+									<ul>
+										<li>Blancas</li>
+										<li>Tintas</li>
+									</ul>
+							</div>
+																
+					 <button class="sub-button" onclick="toggleSubSection('fermentacion')">Fermentación</button>
+                    <div id="fermentacion" class="content-section info-card">
+                        <h3>Fermentación Alcohólica</h3>
+							<p>Al llegar a la bodega, las uvas se estrujan, liberando la pulpa. Las levaduras transforman los azúcares en alcohol y CO₂, generando calor que debe controlarse para evitar superar los 30 °C y que las levaduras mueran.</p>
+                        <h3>Fermentación Maloláctica</h3>
+							<p>Las bacterias convierten el ácido málico en ácido láctico, suavizando la acidez del vino. Esta fermentación dura entre 15 y 21 días y puede realizarse en depósitos o barricas.</p>
+						<h3>Maceración</h3>
+						    <p>Se dejan los hollejos en contacto con el mosto durante la fermentación para aportar color y sabor al vino.</p>
+					</div>
+					<button class="sub-button" onclick="toggleSubSection('composicion')">Composición del vino</button>
+                    <div id="composicion" class="content-section info-card">
+							<ul>
+								<li><strong>Agua:</strong> Constituye el 85% del vino y aporta minerales que estuvo amamantando la vid del suelo.</li>
+								<li><strong>Azucares:</strong> Principalmente glucosa y fructosa, esenciales para la fermentación. Su proporción varía según el tipo de vino.</li>
+								<li><strong>Alcohol: </strong> Representa entre el 10% y 14% del volumen.</li>
+								<li><strong>Ácidos: </strong> Dos tipos que provienen tanto de la uva como de la fermentación.</li>										
+							</ul>
+					</div>
+                </div>
+            </div>
+			<button class="sub-button" onclick="toggleSubSection('tipos')">2. Tipos de vinos en España</button>
+                    <div id="tipos" class="content-section info-card">
+						<h3>Vinos de calidad con Indicación Geográfica (VC):</h3>
+							<p>Producidos en regiones específicas, con uvas locales y calidad influenciada por el entorno o factores humanos. Existen 7 regiones.</p>
+                        <h3>Vinos con Denominación de Origen (D.O.):</h3>
+							<p>Elaborados en zonas delimitadas con uvas locales, destacando por su prestigio y calidad relacionada con el entorno. Hay 69 D.O. en España.</p>
+						<h3>Vinos con Denominación de Origen Calificada (D.O.Ca.):</h3>
+						    <p>Categoría superior a la D.O., requiere al menos 10 años de reconocimiento y controles estrictos. Solo dos en España: Rioja y Priorat.</p>
+						<h3>Vinos de Pago (VP):</h3>
+							<p>Provienen de viñedos únicos con características especiales de suelo y microclima. Existen 17 vinos de Pago.</p>
+					</div>
+
+            <!-- Sección 1.3: Denominaciones de Origen -->
+            <div class="section-container">
+                <button class="button" onclick="toggleSection('do')">3. Denominaciones de Origen</button>
+                <div id="do" class="content-section2">
+                    <button class="sub-button" onclick="toggleSubSection('tipos-do')">DO</button>
+                    <div id="tipos-do" class="content-section info-card">
+                        <h3>DO (Denominación de Origen):</h3>
+							<p>Nivel más estricto. Garantiza que todo el proceso, desde el cultivo de la uva hasta la elaboración del vino, ocurre en una región específica y sigue normas rigurosas de calidad</p>
+						<h3>ETG (Especialidad Tradicional Garantizada):</h3>
+							<p>Protege una forma de producción tradicional, pero no necesariamente está vinculada a una región concreta. El enfoque es en el método, no en el origen geográfico.</p>
+						<h3>IGP (Indicación Geográfica Protegida):</h3>
+						    <p>Certifica que al menos una parte del proceso de producción ocurre en una región específica, pero permite más flexibilidad en cuanto a variedades de uva y técnicas..</p>						
+                    </div>
+                    <button class="sub-button" onclick="toggleSubSection('do-murcia')">DO de España y Murcia </button>
+                    <div id="do-murcia" class="content-section info-card">
+                        <h3>España</h3>
+							<p>En la actualidad existen 69 denominaciones de origen en España</p>
+						<h3>Murcia</h3>
+							<ul>
+								<li><strong>Jumilla:</strong> Monastrell. </li>
+								<li><strong>Yecla:</strong> Monastrell.</li>
+								<li><strong>Bullas:</strong> Monastrell.</li>
+								<li><strong> Uvas Autorizadas</strong>	
+									<ul>
+										<li> Autorizadas Tintas
+											<ul>
+												<li>Syrah</li>
+												<li>Tempranillo</li>
+												<li>Garnacha</li>
+											</ul>
+										</li>
+										<li> Autorizadas Blancas
+											<ul>
+												<li>Macabeo</li>
+												<li>Chardonnay</li>
+												<li>Moscatel</li>
+												<li>Airén</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>												
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Sección 4: Cata de Vinos -->
+    <div class="section-container">
+        <button class="button" onclick="toggleSection('cata')"><img src="./cata.png" alt="Icono cata"> La cata de Vinos</button>
+        <div id="cata" class="content-section">
+            <button class="sub-button" onclick="toggleSubSection('fases-cata')">Fases de la Cata</button>
+            <div id="fases-cata" class="content-section info-card">
+                <h3>Fase visual</h3>
+					<p>En esta fase veremos si el vino está limpio, sin impurezas, carbónico, si tiene burbujutas, el color, edad e intensidad del vino.
+						<br>
+						Debemos inclinar la copa cogida por el tallo sobre un fondo blanco.
+					</p>
+				<h3>Fase olfativa</h3>
+					<p>Se realiza en dos fases:</p>
+						<ul>
+							<li><strong>A copa parada:</strong> Sin mover la copa. la llevamos a la nariz y analizamos lo que olemos</li>
+							<li><strong>Moviendo la copa:</strong> Haciendo círculos y llevándola a la nariz para sacar aún más aromas</li>
+						</ul>
+				<h3>Fase gustativa</h3>
+					<p>Primero, tomaremos un pequeño sorbo y pasaremos el vino por la lengua para percibir su dulzor, salinidad, acidez, amargor o umami. <br>
+					Al tragarlo, entra en juego la retronasal, que lleva los aromas hacia la parte trasera de la nariz, intensificando las notas percibidas en la fase olfativa.</p>
+            </div>           
+        </div>
+    </div>
+
+    <!-- Sección 5: Maridaje -->
+    <div class="section-container">
+        <button class="button" onclick="toggleSection('maridaje')"><img src="./maridaje.png" alt="Icono maridaje"> El Maridaje</button>
+        <div id="maridaje" class="content-section">
+			<button class="sub-button" onclick="toggleSubSection('maridar')">1. A tener en cuenta</button>
+            <div id="maridar" class="content-section info-card">
+                <p>A la hora de maridar en los vinos debemos tener en cuenta:</p>
+					<ul>
+						<li><Strong>Color:</Strong> Según envejece pasade un rojo rubí a ladrillo. Cuanto menos color tenga implica más crianza, por tanto más incrementa su cuerpo e intensidad.</li>
+						<li><Strong>Aroma:</Strong> Veremos la intensidad, también si ha envejecido, con sus aromas a madera, a tosatados.</li>
+						<li><Strong>Sabor:</Strong> Encontraremos el azúcar, la acidez, el grado alcohólico, los taninos y su persistencia.</li>				
+					</ul>
+				<p>A la hora de maridar con los alimentos debemos tener en cuenta:</p>
+					<ul>
+						<li><Strong>Tipo de alimento:</Strong> Si es carne, percado, verduras, legumbres, arroces, huevos,etc..</li>
+						<li><Strong>Tipo de cocinado:</Strong> Cómo se elabora la materia prima; cocido, al hornos, en guiso, etc.</li>
+						<li><Strong>Sabor y textura:</Strong> Si es salado, ácido, ligero, graso, etc.</li>				
+						<li><Strong>Salsas y especias:</Strong> Cómo está condimentado, con qué se ha especiado, qué salsa lo acompaña, es dulce, picante, etc.</li>
+						<li><Strong>Color:</Strong> Es oscuro, claro.</li>			
+					</ul>
+            </div>
+            <button class="sub-button" onclick="toggleSubSection('tabla-quesos')">2. Tabla de Quesos y Reglas</button>
+            <div id="tabla-quesos" class="content-section info-card">
+                <p>Pautas a tener en cuenta a la hora de cortar queso:</p>
+				<ul>
+					<li>Entre 4-8 variedades: Recomendado 5 quesos para no saturar el paladar.</li>
+					<li>150-200 gr por persona si es plato principal.</li>
+					<li>50 gr por presona si es aperitivo.</li>
+					<li>En textura, se corta y colocan del mas blando al mas duro.</li>
+					<li>10º-15º de temperatura para que no se rancien.</li>
+					<li>En sabor se cortan y colocan del menos fuerte al mas fuerte. </li>
+					<li>Se colocan en la tabla en el sentido del reloj, del más suave al más intenso.</li>
+					<li>Quesos intensos, menos grosor.</li>
+				</ul>
+				<p><b>***</b>En los casos de quesos blandos pero fuertes, se prioriza el orden de sabores sobre la textura, es decir, aunque sea un queso blando, por su intensidad se colocará después de los quesos más suaves en sabor.<b>***</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 6: Servicio del Vino -->
+    <div class="section-container">
+        <button class="button" onclick="toggleSection('servicio')"><img src="./servicio.png" alt="Icono servicio"> El Servicio del Vino</button>
+        <div id="servicio" class="content-section info-cardS">
+            <h3>Protocolo para el servicio de vinos</h3>
+			<ul>
+				<li>Presentar la carta de vinos abierta por la derecha al anfitrión/a o dejarla a su derecha si es grande.</li>
+				<li>Regresar tras unos minutos para ofrecer ayuda y aconsejar según maridaje, gustos y preferencias, tomando nota en la comanda.</li>
+				<li>Llevar el vino solicitado con cuidado (en cesta si es reserva/gran reserva) y mostrarlo al cliente para confirmar.</li>
+				<li>Abrir la botella cortando la cápsula bajo el gollete, usando el sacacorchos en dos tiempos para extraer el corcho.</li>
+				<li>Limpiar la boca de la botella, oler el corcho y presentarlo en un platillo al cliente; servir una pequeña cantidad para su cata y aprobación.</li>
+				<li>Servir el vino con la etiqueta hacia el cliente, girar la botella al terminar para evitar goteos y limpiar con el lito; rellenar copas según necesidad.</li>
+				<li>Servir primero a las señoras, luego a los señores y por último al anfitrión.</li>
+				<li> En caso de ser vino tinto:
+					<ul>
+						<li>Colocar la botella en el centro de la mesa sobre un plato pequeño con una servilleta de cóctel.</li>
+					</ul>
+				
+				</li>
+				<li>En caso de ser vino Blanco:
+					<ul>
+						<li>Preparar una champañera de cava con hielo y colocarla en el centro de la mesa sobre un plato con una servilleta doblada en forma de flor de loto.</li>
+					</ul>
+				
+				</li>
+				
+			</ul>
+		</div>
+    </div>
+
+	<!-- VOLVER A INICIO -->   			  
+			<a href="index.html"> <button class="volver" >Inicio</button> </a>
+			
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.style.display = section.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleSubSection(subId) {
+            const subSection = document.getElementById(subId);
+            subSection.style.display = subSection.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

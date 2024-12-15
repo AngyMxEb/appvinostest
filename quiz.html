@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+	    * {
+        font-family: 'Roboto', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background: #d8b5a2;
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+	h1 {
+		font-size: 2rem;
+        margin-top: 60px;
+		color: #800020;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    }
+    h1:hover {
+        transform: scale(1.05);
+		text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    .quiz-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+
+}
+
+.quiz-question {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+	color: #fffaf0; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+}
+ .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quiz-option {
+    padding: 15px;
+    border: none;
+    background:rgba(128, 0, 32, 0.2);
+    color: #800020;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.quiz-option:hover {
+   background: rgba(255, 182, 193, 0.3);
+        transform: scale(1.05);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.quiz-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fffaf0; /* Marfil claro */
+    color: #8B0000; /* Vino tinto */
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+.quiz-option.correct {
+    background-color: rgba(34, 139, 34, 0.8); 
+}
+
+.quiz-option.incorrect {
+    background-color: rgba(178, 34, 34, 0.8); 
+}
+
+.divVolver {
+    display: relative;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;       
+    margin-bottom: 20%;
+    margin-left: 25%;
+}
+    .volver {
+        background: #a41a4e;
+        border: none;
+        color: white;
+        padding:10px; 
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        width: 40%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+		bottom:20px;
+    }
+    .volver:hover {
+        background: #b31c56;
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+	    .volverI {
+        background: #a41a4e;
+        border: none;
+        color: white;
+        padding:10px; 
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 20px;
+        width: 40%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+		bottom:10px;
+		top:30px;
+    }
+    .volverI:hover {
+        background: #b31c56;
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+  #review-questions {
+    background: rgba(128, 0, 32, 0.2); /* Translúcido inspirado en vino tinto */
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    cursor: pointer; 
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    width: 90%;
+	}
+	#prev-btn{
+			background: #a41a4e;
+			border: none;
+			color: white;
+			padding:10px; 
+			font-size: 1.2rem;
+			cursor: pointer;
+			border-radius: 8px;
+			margin-top: 20px;
+			width: 10%;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			bottom:20px;
+			font-size: 0.7rem;
+	}
+	#prev-btn:hover {
+			background: #b31c56;
+			transform: scale(1.05);
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+		}
+	#next-btn{
+			background: #a41a4e;
+			border: none;
+			color: white;
+			padding:10px; 
+			font-size: 1.2rem;
+			cursor: pointer;
+			border-radius: 8px;
+			margin-top: 20px;
+			width: 10%;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			bottom:20px;
+			font-size: 0.7rem;
+	}
+	#next-btn:hover {
+			background: #b31c56;
+			transform: scale(1.05);
+			box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+    </style>
+</head>
+<body>
+    <h1>¿Cuánto sabes?</h1>
+    <div class="quiz-container">
+        <div class="quiz-timer" id="quiz-timer">10</div>
+        <div class="quiz-question" id="quiz-question">Cargando pregunta...</div>
+        <div class="quiz-options" id="quiz-options"></div>
+    </div>
+	 
+	  <!-- Opciones de ver las preguntas -->
+  <div id="quiz-completion" style="display: none;">       
+     <div id="review-questions">
+		<h2>Revisar respuestas:</h2>			
+	 </div>		
+	 <div>
+        <button id="prev-btn" onclick="showPage(currentPage - 1)" style="display: none;">Anterior</button>
+		<button id="next-btn" onclick="showPage(currentPage + 1)">Siguiente</button>
+	</div>
+        <a href="quiz.html"><button class="volver">Iniciar otra vez</button></a>
+    </div>
+  
+    <!-- VOLVER A INICIO -->   		
+	
+			<a href="index.html"> <button class="volverI" >Página de Inicio</button> </a>
+
+	
+    <script>
+        const questions = [
+            {question: '¿Cuál es la variedad de uva del "Valtosca"?', options: ['Syrah', 'Tempranillo', 'Cabernet Sauvignon', 'Merlot'], answer: 'Syrah' },
+            {question: '¿Qué bodega produce el vino "El molar"?', options: ['Casa Castillo', 'Cerrón', 'Juan Gil', 'Barahonda'], answer: 'Casa Castillo' },
+			{question: '¿Qué vino de la DO Cava es espumoso?', options: ['Perelada Brut Reserva', 'Mirgin Brut Nature', 'Juan Gil', 'Arrogante'], answer: 'Mirgin Brut Nature'},
+            {question: '¿Cuáles son las DO de la Region de Murcia?', options: ['Monastrell,Jumilla y Macabeo','Jumilla,Yecla y Bullas', 'Rioja,Rias Baixas,Bullas', 'Tempranillo,Yecla y Totana', ], answer: 'Jumilla,Yecla y Bullas'},
+			{question: '¿Cuáles son los tipos de vino disponibles de "Remordimiento"?', options: [ 'Blanco', 'Tinto y Rosado','Tinto', 'Dulce y Blanco', 'Tinto y Blanco'], answer: 'Tinto y Blanco'},
+			{question: '¿Qué cantidad tiene el vino "Arrogante Magnum"?', options: [ '750ml', '1500ml', '650ml', '1.5ml'], answer: '1500ml'},
+			{question: '¿Cuál es la principal uva utilizada en la Denominación de Origen Jumilla?', options: [ 'Tempranillo', 'Monastrell','Cabernet Sauvignon', 'Merlot'], answer: 'Monastrell'},
+			{question: '¿Cuál es la recomendación de maridaje del vino Valtosca"?', options: [ 'Pescados', 'Carnes rojas a la parrilla','Quesos suaves', 'Postres', 'Tinto y Blanco'], answer: 'Carnes rojas a la parrilla'},
+			{question: '¿Qué Denominación de Origen tiene el vino "El Molar"?', options: ['Jumilla', 'Yecla', 'Bullas', 'Cava'], answer: 'Jumilla'},
+			{question: '¿Cuál es una recomendación de maridaje del vino "La Tendida"?',options: ['Carnes blancas, embutidos, pasta y arroces','Quesos curados, carnes rojas y chocolate', 'Verduras, quesos blandos y arroces','Caza, embutidos y carnes rojas'], answer: 'Carnes blancas, embutidos, pasta y arroces'},
+			{question: '¿De qué año es el vino tinto "Remordimiento"?',options: ['2020', '2021', '2022', '2023'],answer: '2022'},
+			{question: '¿Qué tipo de vino es "Casa Ermita"?',options: ['Tinto', 'Blanco', 'Dulce', 'Espumoso'],answer: 'Dulce'},
+			{question: '¿Qué variedades de uva componen el cava "Perelada Brut Reserva"?',options: ['Macabeo, Xarel·lo y Parellada','Monastrell, Garnacha y Syrah','Chardonnay y Verdejo','Moscatel y Sauvignon Blanc'],answer: 'Macabeo, Xarel·lo y Parellada'},
+			{question: '¿Qué tipo de uva se usa para el vino "La tendida"?',options: ["Monastrell, Garnacha", "Tempranillo", "Cabernet Sauvignon", "Syrah"],answer: 'Monastrell, Garnacha'},
+			{question: '¿Qué bodega produce el vino "Remordimiento"?',options: ["Bodegas Cerrón", "Bodegas Juan Gil", "Bodegas Monastrell", "Bodegas Perelada"],answer: 'Cerrón'},
+			{question: "¿Qué variedad de uva se utiliza en el tinto 'Juan Gil'?",options: ["Monastrell", "Cabernet Sauvignon", "Merlot", "Syrah"],answer: "Monastrell"},
+			{question: "¿En qué bodega se produce 'Arrogante'?",options: ["Bodegas Casa Castillo", "Bodegas Arrogante", "Bodegas Barahonda", "Bodegas Monastrell"],answer: "Arrogante"},
+		    {question: "¿Qué variedad de uva se utiliza para el vino dulce 'Casa Ermita'?",options: ["Monastrell", "Moscatel", "Tempranillo", "Cabernet Sauvignon"],answer: "Monastrell"},
+		    {question: "¿Qué tipo de vino es 'El bicho raro'?",options: ["Tinto", "Blanco", "Rosado", "Dulce"],answer: "Tinto"},
+			{question: "¿Qué uva se utiliza para elaborar el vino 'De Nariz Terroir'?",options: ["Monastrell", "Garnacha", "Cabernet Sauvignon", "Syrah"],answer: "Monastrell"},
+			{question: "¿Cuál de las siguientes bodegas pertenece a la Denominación de Origen Jumilla?",options: ["Casa Castillo", "Barahonda", "Monastrell", "Perelada"],answer: "Casa Castillo"},
+			{question: "¿Cuál de estas bodegas pertenece a la Denominación de Origen Yecla?",options: ["Barahonda, Casa Castillo"," Juan Gil, Cerrón", "Monastrell, De Nariz","Barahonda, De Nariz", "Arrogante, Negrete Blue Wines"],answer: "Barahonda, De Nariz"},
+			{question: '¿Qué tipo de vino es "El Molar"?', options: ['Tinto', 'Blanco', 'Rosado', 'Espumoso'], answer: 'Tinto' },
+			{question: '¿De qué bodega es el vino "La Tendida"?', options: ['Casa Castillo', 'Bodegas Juan Gil', 'Bodegas Barahonda', 'Bodegas Lavia'], answer: 'Casa Castillo' },
+			{question: '¿Qué tipo de vino es "El Tiempo que nos une"?', options: ['Tinto', 'Blanco', 'Rosado', 'Dulce'], answer: 'Tinto' },
+			{question: '¿Qué variedad de uva se utiliza para el vino "El Molar"?', options: ['Tempranillo y Syrah', 'Monastrelly Garnacha', 'Garnacha', 'Macabeo'], answer: 'Garnacha' },
+			{question: '¿Qué tipo de vino es "Remordimiento Chardonnay"?', options: ['Tinto', 'Rosado', 'Blanco','Dulce'], answer: 'Blanco' },
+			{question: '¿Qué tipo de vino es "Juan Gil Moscatel"?', options: ['Tinto', 'Blanco', 'Rosado', 'Dulce'], answer: 'Blanco' },
+			{question: '¿Cuál de estos vinos no es de Jumilla?', options: ['Valtosca', 'El Molar', 'Arrogante', 'Negrete'], answer: 'Negrete' },
+			{question: '¿Cuál de estos vinos es de Bullas?', options: ['El Molar', 'Salto de Usero', 'Remordimiento', 'Casa Ermita'], answer: 'Salto de Usero' },
+			{question: '¿Cuál de estos vinos es de Yecla?', options: ['Almudí', 'La Tendida', 'El Bicho Raro', 'Casa Ermita'], answer: 'El Bicho Raro' },
+			{question: '¿Cuál de estos vinos es de Jumilla?', options: ['De Nariz Terroir', 'Do Bellum', 'Casa del Capitán', 'La Tendida'], answer: 'La Tendida' },	
+			{question: '¿Qué variedad de uva se utiliza en el vino tinto "Remordimiento"?', options: ['Monastrell','Garnacha, Syrah', 'Garnacha', 'Syrah', 'Monastrell, Garnacha'], answer: 'Monastrell, Garnacha' },
+			{question: '¿Qué variedad de uva se utiliza en el vino "Arrogante"?', options: ['Macabeo,Monastrell', 'Monastrell,Syrah', 'Monastrell,Garnacha,Syrah', 'Garnacha,Monastrell'], answer: 'Monastrell,Garnacha,Syrah' },
+			{question: '¿Qué variedad de uva se utiliza en el vino blanco "Remordimiento"?', options: ['Macabeo', 'Chardonnay', 'Sauvignon Blanc', 'Moscatel'], answer: 'Chardonnay' },
+			{question: '¿De qué DO es el vino "Lavia Pueblo"?', options: ['Jumilla', 'Yecla', 'Bullas', 'Cava'], answer: 'Bullas' },
+			{question: '¿Qué tipo de vino es "Chaveo Deshielo"?', options: ['Tinto', 'Blanco', 'Dulce', 'Espumoso'], answer: 'Dulce' },
+			{question: '¿De qué DO es el vino "Lualma"?', options: ['Jumilla','Bullas','Yecla', 'Cava'], answer: 'Yecla' },
+			{question: '¿Cuáles son los tipos de vino disponibles de "Casa del Capitán"?', options: ['Dulce y Blanco', 'Blanco', 'Tinto y Blanco', 'Dulce'], answer: 'Tinto y Blanco' },	
+	];
+        let currentQuestionIndex = 0;
+		let timer;
+        let timeLeft = 20;
+		
+		function shuffleQuestions() {
+            questions.sort(() => Math.random() - 0.5);
+        }
+		
+		 function startTimer() {
+            const timerElement = document.getElementById('quiz-timer');
+            timeLeft = 20; 
+            timerElement.textContent = timeLeft;
+
+            clearInterval(timer); 
+            timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    nextQuestion();
+                }
+            }, 2000);
+        }
+
+        function loadQuestion() {
+            const questionElement = document.getElementById('quiz-question');
+            const optionsElement = document.getElementById('quiz-options');
+            const question = questions[currentQuestionIndex];
+            
+            questionElement.textContent = `Pregunta ${currentQuestionIndex + 1}: ${question.question}`;
+            optionsElement.innerHTML = '';
+            
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option';
+                button.textContent = option;
+                button.onclick = () => {
+                    clearInterval(timer); 
+                    checkAnswer(option, button);
+                };
+                optionsElement.appendChild(button);
+            });
+
+            startTimer(); 
+        }
+
+        function checkAnswer(selected, selectedButton) {
+            const question = questions[currentQuestionIndex];
+			const options = document.querySelectorAll('.quiz-option');
+			
+            options.forEach(optionButton => {
+                if (optionButton.textContent === question.answer) {
+                    optionButton.classList.add('correct'); 
+                }
+                if (optionButton.textContent === selected && optionButton !== selectedButton){
+                    optionButton.classList.add('incorrect'); 
+                }
+            });
+			localStorage.setItem(`selectedAnswer_${question.question}`, selected);
+			 
+            setTimeout(nextQuestion, 1000);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showCompletion();
+            }
+        }
+
+        function showPage(page) {
+            if (page < 0 || page >= Math.ceil(questions.length / 6)) return;
+            currentPage = page;
+
+            const reviewContainer = document.getElementById('review-questions');
+            reviewContainer.innerHTML = '';
+
+            const start = currentPage * 6;
+            const end = start + 6;
+
+            questions.slice(start, end).forEach(q => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `<b>${q.question}</b><br>${q.options.map(option => {
+                    const selectedAnswer = localStorage.getItem(`selectedAnswer_${q.question}`);
+                    if (option === q.answer) {
+                        return `<span style="color: green;">${option}</span>`;
+                    } else if (option === selectedAnswer) {
+                        return `<span style="color: red;">${option}</span>`;
+                    }
+                    return option;
+                }).join('<br>')}<br><br>`;
+                reviewContainer.appendChild(questionDiv);
+            });
+
+            document.getElementById('prev-btn').style.display = currentPage === 0 ? 'none' : 'inline-block';
+            document.getElementById('next-btn').style.display = currentPage === Math.ceil(questions.length / 6) - 1 ? 'none' : 'inline-block';
+        }
+
+        function showCompletion() {
+            const quizContainer = document.querySelector('.quiz-container');
+            quizContainer.style.display = 'none';
+            const completionSection = document.getElementById('quiz-completion');
+            completionSection.style.display = 'block';
+
+            showPage(0);
+
+        }
+		shuffleQuestions();
+        loadQuestion();
+    </script>
+	
+	  
+</body>
+</html>

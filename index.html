@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App de Vinos Interactiva</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="banner">
+        <img src="./banner.png" alt="wine and grapes" />
+      </div>
+	  
+      <!-- Contenedor para los botones y el menú desplegable -->
+      <div class="button-container">
+			<!-- Botón "Estudia" -->
+			<div class="options-container">
+			  <button id="estudiaBtn" type="button" class="button" >Estudia</button>
+			  <!-- Opciones de "Estudia" que aparecerán como desplegable -->
+			  <div class="options" id="options" style="display: none;">
+				<a href="carta.html">Carta</a>
+				<a href="info.html">Servicio</a>
+			  </div>
+			</div>
+			<!-- Botón "Quiz" -->
+			<div class="options-container">
+			  <button id="quiz" type="button" class="button">Quiz</button>
+			  <!-- Opciones de "Estudia" que aparecerán como desplegable -->
+			  <div class="optionsq" id="optionsq" style="display: none;">
+				<a href="quiz.html">Carta</a>
+				<a href="quizInfo.html">Servicio</a>
+			  </div>
+			</div>       
+      </div>
+    </div>
+
+    <script>
+      // mostrar las opciones
+      document
+        .getElementById('estudiaBtn')
+        .addEventListener('click', function () {
+          var options = document.getElementById('options');
+          if (
+            options.style.display === 'none' ||
+            options.style.display === ''
+          ) {
+            options.style.display = 'block';
+          } else {
+            options.style.display = 'none';
+          }
+        });
+    </script>
+	<script>
+      // mostrar las opciones
+      document
+        .getElementById('quiz')
+        .addEventListener('click', function () {
+          var options = document.getElementById('optionsq');
+          if (
+            options.style.display === 'none' ||
+            options.style.display === ''
+          ) {
+            options.style.display = 'block';
+          } else {
+            options.style.display = 'none';
+          }
+        });
+    </script>
+  </body>
+</html>
